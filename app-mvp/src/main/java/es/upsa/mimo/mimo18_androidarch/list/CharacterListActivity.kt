@@ -4,10 +4,9 @@ import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
-import es.upsa.mimo.mimo18_androidarch.MarvelApplication
+import dagger.android.AndroidInjection
 import es.upsa.mimo.mimo18_androidarch.R
 import es.upsa.mimo.mimo18_androidarch.detail.CharacterDetailActivity
-import es.upsa.mimo.mimo18_androidarch.detail.di.DaggerCharacterListComponent
 import es.upsa.mimo.mimo18_androidarch.marvel.MarvelApi
 import es.upsa.mimo.mimo18_androidarch.marvel.MarvelApiConstants
 import es.upsa.mimo.mimo18_androidarch.marvel.apiModel.CharactersResponse
@@ -63,10 +62,7 @@ class CharacterListActivity : AppCompatActivity() {
     }
 
     private fun injectDependencies() {
-        DaggerCharacterListComponent.builder()
-                .applicationComponent(MarvelApplication.appComponent)
-                .build()
-                .inject(this)
+        AndroidInjection.inject(this)
     }
 
 

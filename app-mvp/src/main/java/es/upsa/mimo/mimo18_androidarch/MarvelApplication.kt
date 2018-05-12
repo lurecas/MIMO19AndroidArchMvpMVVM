@@ -1,33 +1,27 @@
 package es.upsa.mimo.mimo18_androidarch
 
+import android.app.Activity
 import android.app.Application
-import es.upsa.mimo.mimo18_androidarch.di.component.ApplicationComponent
+import dagger.android.DispatchingAndroidInjector
+import dagger.android.HasActivityInjector
 import es.upsa.mimo.mimo18_androidarch.di.component.DaggerApplicationComponent
-import es.upsa.mimo.mimo18_androidarch.di.module.AndroidModule
+import javax.inject.Inject
 
 
-open class MarvelApplication : Application() {
+open class MarvelApplication : Application(), HasActivityInjector {
+
+    @Inject
+    lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Activity>
 
     override fun onCreate() {
         super.onCreate()
 
-        appComponent = createComponent()
-    }
-
-    open fun createComponent(): ApplicationComponent {
-        return DaggerApplicationComponent.builder()
-                .androidModule(AndroidModule(this))
+        DaggerApplicationComponent.builder()
+                .application(this)
                 .build()
+                .inject(this)
     }
 
-    fun getComponent(): ApplicationComponent {
-        return appComponent
-    }
-
-    companion object {
-        @JvmStatic
-        lateinit var appComponent: ApplicationComponent
-    }
-
+    override fun activityInjector(): DispatchingAndroidInjector<Activity> = dispatchingAndroidInjector
 
 }

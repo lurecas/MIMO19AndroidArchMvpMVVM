@@ -30,6 +30,7 @@ dependencies {
             supportLib: '27.1.1',
             picasso   : '2.71828',
             retrofit  : '2.4.0',
+            daggerVersion : '2.15',
 
             junit     : '4.12',
     ]
@@ -52,8 +53,12 @@ dependencies {
     implementation "com.squareup.picasso:picasso:$versions.picasso"
 
 
-    implementation 'com.google.dagger:dagger:2.15'
-    kapt 'com.google.dagger:dagger-compiler:2.15'
+    kapt "com.google.dagger:dagger-compiler:$versions.daggerVersion"
+    kapt "com.google.dagger:dagger-android-processor:$versions.daggerVersion"
+
+    implementation "com.google.dagger:dagger:$versions.daggerVersion"
+    implementation "com.google.dagger:dagger-android:$versions.daggerVersion"
+
 
     implementation "com.google.code.gson:gson:2.8.4"
     implementation "com.squareup.retrofit2:retrofit:$versions.retrofit"

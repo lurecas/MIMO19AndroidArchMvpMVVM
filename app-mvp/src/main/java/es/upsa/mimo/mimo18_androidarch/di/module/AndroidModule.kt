@@ -5,22 +5,25 @@ import android.content.res.Resources
 import dagger.Module
 import dagger.Provides
 import es.upsa.mimo.mimo18_androidarch.MarvelApplication
+import es.upsa.mimo.mimo18_androidarch.detail.di.CharacterDetailComponent
+import es.upsa.mimo.mimo18_androidarch.list.di.CharacterListComponent
 import es.upsa.mimo.mimo18_androidarch.util.ActivityNavigator
 import es.upsa.mimo.mimo18_androidarch.util.ActivityNavigatorImpl
 
 
-@Module
-class AndroidModule(private val application: MarvelApplication) {
+@Module(subcomponents = [
+    CharacterListComponent::class,
+    CharacterDetailComponent::class
+])
+class AndroidModule {
 
     @Provides
-    fun provideContext(): Context = application.applicationContext
+    fun provideContext(application: MarvelApplication): Context = application
 
     @Provides
-    fun provideResources(): Resources = application.resources
+    fun provideResources(application: MarvelApplication): Resources = application.resources
 
     @Provides
-    fun provideNavigator(
-            context: Context
-    ): ActivityNavigator = ActivityNavigatorImpl(context = context)
+    fun provideNavigator(application: MarvelApplication): ActivityNavigator = ActivityNavigatorImpl(context = application)
 
 }

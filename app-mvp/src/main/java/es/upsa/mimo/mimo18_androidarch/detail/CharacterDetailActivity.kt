@@ -5,9 +5,8 @@ import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.view.View
-import es.upsa.mimo.mimo18_androidarch.MarvelApplication
+import dagger.android.AndroidInjection
 import es.upsa.mimo.mimo18_androidarch.R
-import es.upsa.mimo.mimo18_androidarch.detail.di.DaggerCharacterListComponent
 import es.upsa.mimo.mimo18_androidarch.util.ImageLoader
 import io.github.luizgrp.sectionedrecyclerviewadapter.SectionedRecyclerViewAdapter
 import kotlinx.android.synthetic.main.character_detail_activity.*
@@ -54,11 +53,7 @@ class CharacterDetailActivity : AppCompatActivity(), CharacterDetailContract.Vie
     }
 
     private fun injectDependencies() {
-        DaggerCharacterListComponent.builder()
-                .applicationComponent(MarvelApplication.appComponent)
-                .build()
-                .plusDetailComponent()
-                .inject(this)
+        AndroidInjection.inject(this)
     }
 
     override fun showLoadingIndicator() {

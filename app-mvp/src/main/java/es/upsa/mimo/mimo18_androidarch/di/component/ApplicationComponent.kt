@@ -1,26 +1,29 @@
 package es.upsa.mimo.mimo18_androidarch.di.component
 
-import android.content.Context
-import android.content.res.Resources
+import dagger.BindsInstance
 import dagger.Component
+import dagger.android.AndroidInjectionModule
+import es.upsa.mimo.mimo18_androidarch.MarvelApplication
+import es.upsa.mimo.mimo18_androidarch.di.module.ActivityBuilder
 import es.upsa.mimo.mimo18_androidarch.di.module.AndroidModule
-import es.upsa.mimo.mimo18_androidarch.di.module.ApiModule
-import es.upsa.mimo.mimo18_androidarch.di.module.NetworkModule
-import es.upsa.mimo.mimo18_androidarch.marvel.MarvelApi
-import es.upsa.mimo.mimo18_androidarch.util.ActivityNavigator
 import javax.inject.Singleton
 
 @Singleton
 @Component(modules = [
     AndroidModule::class,
-    NetworkModule::class,
-    ApiModule::class]
+    ActivityBuilder::class,
+    AndroidInjectionModule::class]
 )
 interface ApplicationComponent {
 
-    fun context(): Context
-    fun resources(): Resources
-    fun activityNavigator(): ActivityNavigator
-    fun marvelApi(): MarvelApi
+    @Component.Builder
+    interface Builder {
+        @BindsInstance
+        fun application(app: MarvelApplication): Builder
+
+        fun build(): ApplicationComponent
+    }
+
+    fun inject(app: MarvelApplication)
 
 }

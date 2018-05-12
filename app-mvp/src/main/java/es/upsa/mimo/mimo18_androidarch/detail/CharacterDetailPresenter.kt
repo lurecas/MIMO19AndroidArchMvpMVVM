@@ -82,7 +82,6 @@ class CharacterDetailPresenter(
                     }
 
                     override fun onFailure(call: Call<CharactersResponse>, t: Throwable) {
-                        Log.e(TAG, "Error fetching character data", t)
                         view?.hideLoadingIndicator()
                         view?.showCharacterLoadError("Error obtaining character $characterId detail")
                     }
@@ -118,11 +117,5 @@ class CharacterDetailPresenter(
         view?.showCharacterComics(comicsNames)
 
     }
-
-
-    companion object {
-        private val TAG = CharacterDetailPresenter::class.java.canonicalName
-    }
-
 
 }

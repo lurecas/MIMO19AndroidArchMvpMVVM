@@ -1,12 +1,18 @@
 package es.upsa.mimo.mimo18_androidarch.detail
 
+//import org.hamcrest.CoreMatchers.`is`
 import android.app.Activity
 import android.content.Intent
 import android.support.design.widget.CollapsingToolbarLayout
 import android.support.test.InstrumentationRegistry
+import android.support.test.espresso.Espresso.onData
 import android.support.test.espresso.Espresso.onView
+import android.support.test.espresso.action.ViewActions.click
 import android.support.test.espresso.assertion.ViewAssertions.matches
 import android.support.test.espresso.matcher.ViewMatchers.isAssignableFrom
+import android.support.test.espresso.matcher.ViewMatchers.isDisplayed
+import android.support.test.espresso.matcher.ViewMatchers.withId
+import android.support.test.espresso.matcher.ViewMatchers.withText
 import android.support.test.rule.ActivityTestRule
 import android.support.test.runner.AndroidJUnit4
 import dagger.android.AndroidInjector
@@ -18,11 +24,15 @@ import es.upsa.mimo.mimo18_androidarch.marvel.MarvelApi
 import es.upsa.mimo.mimo18_androidarch.marvel.apiModel.Character
 import es.upsa.mimo.mimo18_androidarch.marvel.apiModel.CharacterDataContainer
 import es.upsa.mimo.mimo18_androidarch.marvel.apiModel.CharactersResponse
+import es.upsa.mimo.mimo18_androidarch.marvel.apiModel.Collection
 import es.upsa.mimo.mimo18_androidarch.marvel.apiModel.Image
+import es.upsa.mimo.mimo18_androidarch.marvel.apiModel.Items
 import es.upsa.mimo.mimo18_androidarch.util.HashGenerator
 import es.upsa.mimo.mimo18_androidarch.util.ImageLoaderImpl
 import es.upsa.mimo.mimo18_androidarch.util.TimestampProvider
-import org.hamcrest.CoreMatchers.`is`
+import org.hamcrest.CoreMatchers.allOf
+import org.hamcrest.CoreMatchers.instanceOf
+import org.hamcrest.Matchers.`is`
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -114,7 +124,10 @@ class CharacterDetailActivityTest {
                 id = TEST_CHAR_ID,
                 name = TEST_CHARACTER_NAME,
                 description = TEST_CHARACTER_DESCRIPTION,
-                thumbnail = Image(path = TEST_CHARACTER_THUMBNAIL_PATH, extension = TEST_CHARACTER_THUMBNAIL_EXTENSION)
+                thumbnail = Image(path = TEST_CHARACTER_THUMBNAIL_PATH, extension = TEST_CHARACTER_THUMBNAIL_EXTENSION),
+                comics = buildMockComicList(),
+                series = buildMockSeriesList()
+
         ).let { character ->
             CharacterDataContainer(
                     count = 1,
@@ -127,6 +140,23 @@ class CharacterDetailActivityTest {
             )
         }
     }
+
+    private fun buildMockComicList(): Collection {
+        return Items(name = TEST_CHARACTER_COMIC_NAME).let {
+            Collection(
+                    items = listOf(it)
+            )
+        }
+    }
+
+    private fun buildMockSeriesList(): Collection {
+        return Items(name = TEST_CHARACTER_SERIES_NAME).let {
+            Collection(
+                    items = listOf(it)
+            )
+        }
+    }
+
 
     private fun mockApi(): MarvelApi {
 
@@ -169,6 +199,20 @@ class CharacterDetailActivityTest {
 
     }
 
+    @Test
+    fun tapOnComicListWillShowSnackbar() {
+        activityTestRule.launchActivity(buildCharacterDetailStartIntent())
+
+        onData(
+                allOf(`is`(instanceOf(String::class.java)),
+                        `is`(TEST_CHARACTER_COMIC_NAME))
+        ).perform(click())
+
+
+        onView(allOf(withId(android.support.design.R.id.snackbar_text), withText("You should read : $TEST_CHARACTER_COMIC_NAME !")))
+                .check(matches(isDisplayed()));
+    }
+
     companion object {
 
         private val TEST_CHAR_ID = "1"
@@ -176,6 +220,8 @@ class CharacterDetailActivityTest {
         private val TEST_CHARACTER_DESCRIPTION = "Test Description"
         private val TEST_CHARACTER_THUMBNAIL_PATH = "https://ep01.epimg.net/internacional/imagenes/2018/05/04/actualidad/1525434241_941769_1525434417_noticia_normal_recorte1"
         private val TEST_CHARACTER_THUMBNAIL_EXTENSION = "jpg"
+        private val TEST_CHARACTER_COMIC_NAME = "comic"
+        private val TEST_CHARACTER_SERIES_NAME = "series"
     }
 
 }

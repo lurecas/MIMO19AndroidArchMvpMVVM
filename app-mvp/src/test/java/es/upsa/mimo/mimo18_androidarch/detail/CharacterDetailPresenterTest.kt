@@ -142,6 +142,16 @@ class CharacterDetailPresenterTest {
 
     }
 
+    @Test
+    fun presenterWillShowNameAfterSuccesfulResponse() {
+        buildPresenterWithSuccesfulResponse()
+
+        presenter?.start(detailView, TEST_CHAR_ID)
+
+        verify(detailView).showCharacterName(TEST_CHARACTER_NAME)
+
+    }
+
 
     @Test
     fun presenterWillShowImage() {

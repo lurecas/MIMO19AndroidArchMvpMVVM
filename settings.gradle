@@ -1,1 +1,1 @@
-include ':app',':app-dagger', ':app-mvp',':app-dagger-android'
+include ':app-mvp'

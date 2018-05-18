@@ -7,6 +7,7 @@ apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 27
+
     defaultConfig {
         applicationId "es.upsa.mimo.mimo18_androidarch.daggerv2"
         minSdkVersion 26
@@ -15,12 +16,18 @@ android {
         versionName "0.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    dataBinding {
+        enabled = true
+    }
+
 }
 
 dependencies {
@@ -51,6 +58,7 @@ dependencies {
     compile 'io.github.luizgrp.sectionedrecyclerviewadapter:sectionedrecyclerviewadapter:1.2.0'
     implementation "com.android.support:design:$versions.supportLib"
     implementation "com.squareup.picasso:picasso:$versions.picasso"
+    kapt 'com.android.databinding:compiler:3.1.1'
 
 
     kapt "com.google.dagger:dagger-compiler:$versions.daggerVersion"
@@ -67,6 +75,7 @@ dependencies {
 
     testImplementation "junit:junit:$testVersions.junitVersion"
     testImplementation "org.mockito:mockito-all:$testVersions.mockitoVersion"
+    testImplementation "com.nhaarman:mockito-kotlin-kt1.1:1.5.0"
     testImplementation "org.hamcrest:hamcrest-all:$testVersions.hamcrestVersion"
 
 

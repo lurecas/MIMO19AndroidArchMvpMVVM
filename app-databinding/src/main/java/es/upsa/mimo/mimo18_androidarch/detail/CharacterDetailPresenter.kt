@@ -1,11 +1,12 @@
 package es.upsa.mimo.mimo18_androidarch.detail
 
-import android.util.Log
 import es.upsa.mimo.mimo18_androidarch.marvel.MarvelApi
 import es.upsa.mimo.mimo18_androidarch.marvel.MarvelApiConstants
 import es.upsa.mimo.mimo18_androidarch.marvel.apiModel.Character
 import es.upsa.mimo.mimo18_androidarch.marvel.apiModel.CharactersResponse
+import es.upsa.mimo.mimo18_androidarch.marvel.bindingModel.CharacterBindingModelMapper
 import es.upsa.mimo.mimo18_androidarch.util.HashGenerator
+import es.upsa.mimo.mimo18_androidarch.util.ImageLoader
 import es.upsa.mimo.mimo18_androidarch.util.TimestampProvider
 import retrofit2.Call
 import retrofit2.Callback
@@ -14,7 +15,8 @@ import retrofit2.Response
 class CharacterDetailPresenter(
         private var api: MarvelApi,
         private var hashGenerator: HashGenerator,
-        private var timestampProvider: TimestampProvider
+        private var timestampProvider: TimestampProvider,
+        private val imageLoader: ImageLoader
 ) : CharacterDetailContract.Presenter {
 
     private var view: CharacterDetailContract.View? = null
@@ -52,9 +54,6 @@ class CharacterDetailPresenter(
 
     private fun fetchMarvelCharacters(characterId: String) {
 
-        view?.hideLoadingIndicator()
-        view?.showLoadingIndicator()
-
         val timestamp = timestampProvider.getTimestamp()
 
         api.getCharacterDetail(
@@ -69,8 +68,6 @@ class CharacterDetailPresenter(
                     override fun onResponse(call: Call<CharactersResponse>,
                                             response: Response<CharactersResponse>) {
 
-                        view?.hideLoadingIndicator()
-
                         if (response.isSuccessful) {
                             val characterList = response.body()!!.data!!.results!!.toList()
                             showCharacterData(characterList.first())
@@ -82,7 +79,6 @@ class CharacterDetailPresenter(
                     }
 
                     override fun onFailure(call: Call<CharactersResponse>, t: Throwable) {
-                        view?.hideLoadingIndicator()
                         view?.showCharacterLoadError("Error obtaining character $characterId detail")
                     }
                 })
@@ -90,32 +86,17 @@ class CharacterDetailPresenter(
 
 
     private fun showCharacterData(character: Character) {
-
-        // Image
-        val thumbnail = character.thumbnail
-        view?.showCharacterImage(thumbnail?.path + "." + thumbnail?.extension)
-
-        // Name
-        view?.showCharacterName(character.name ?: "")
-
-        // Series
-        val seriesNames = character.series?.items?.mapNotNull {
-            it.name
-        } ?: emptyList()
-        view?.showCharacterSeries(seriesNames)
-
-        // Stories
-        val storiesNames: List<String> = character.stories?.items?.mapNotNull {
-            it.name
-        } ?: emptyList()
-        view?.showCharacterStories(storiesNames)
-
-        // Comics
-        val comicsNames = character.comics?.items?.mapNotNull {
-            it.name
-        } ?: emptyList()
-        view?.showCharacterComics(comicsNames)
-
+        CharacterBindingModelMapper.mapCharacterToCharacterBindingModel(
+                character = character,
+                imageLoader = imageLoader
+        ).let { characterBinding ->
+            view?.run {
+                this.showCharacter(character = characterBinding)
+                this.showCharacterComics(comics = characterBinding.comics)
+                this.showCharacterSeries(series = characterBinding.series)
+                this.showCharacterStories(stories = characterBinding.stories)
+            }
+        }
     }
 
 }

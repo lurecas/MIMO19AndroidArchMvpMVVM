@@ -5,6 +5,7 @@ import dagger.Provides
 import es.upsa.mimo.mimo18_androidarch.detail.CharacterDetailPresenter
 import es.upsa.mimo.mimo18_androidarch.marvel.MarvelApi
 import es.upsa.mimo.mimo18_androidarch.util.HashGenerator
+import es.upsa.mimo.mimo18_androidarch.util.ImageLoader
 import es.upsa.mimo.mimo18_androidarch.util.TimestampProvider
 
 
@@ -15,12 +16,14 @@ class CharacterDetailModule {
     fun providesCharacterDetailPresenter(
             api: MarvelApi,
             hashGenerator: HashGenerator,
-            timestampProvider: TimestampProvider
+            timestampProvider: TimestampProvider,
+            imageLoader: ImageLoader
     ): CharacterDetailPresenter {
         return CharacterDetailPresenter(
                 api = api,
                 hashGenerator = hashGenerator,
-                timestampProvider = timestampProvider
+                timestampProvider = timestampProvider,
+                imageLoader = imageLoader
         )
     }
 

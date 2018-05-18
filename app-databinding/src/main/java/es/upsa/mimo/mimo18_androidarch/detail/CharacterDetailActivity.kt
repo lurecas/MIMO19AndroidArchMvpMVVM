@@ -1,16 +1,18 @@
 package es.upsa.mimo.mimo18_androidarch.detail
 
 import android.content.res.Resources
+import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.RecyclerView
 import android.view.View
 import dagger.android.AndroidInjection
 import es.upsa.mimo.mimo18_androidarch.R
-import es.upsa.mimo.mimo18_androidarch.util.ImageLoader
+import es.upsa.mimo.mimo18_androidarch.databinding.CharacterDetailActivityBinding
+import es.upsa.mimo.mimo18_androidarch.marvel.bindingModel.CharacterBindingModel
 import io.github.luizgrp.sectionedrecyclerviewadapter.SectionedRecyclerViewAdapter
 import kotlinx.android.synthetic.main.character_detail_activity.*
-import kotlinx.android.synthetic.main.view_recycler_view.*
 import javax.inject.Inject
 
 
@@ -24,18 +26,17 @@ class CharacterDetailActivity : AppCompatActivity(), CharacterDetailContract.Vie
     lateinit var presenter: CharacterDetailPresenter
 
     @Inject
-    lateinit var imageLoader: ImageLoader
-
-    @Inject
     lateinit var androidResources: Resources
+
+    var binding: CharacterDetailActivityBinding? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.character_detail_activity)
-        injectDependencies()
+        binding = DataBindingUtil.setContentView(this, R.layout.character_detail_activity)
 
-        characterList.adapter = sectionAdapter
+        injectDependencies()
+        (characterList as RecyclerView).adapter = sectionAdapter
 
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -56,23 +57,12 @@ class CharacterDetailActivity : AppCompatActivity(), CharacterDetailContract.Vie
         AndroidInjection.inject(this)
     }
 
-    override fun showLoadingIndicator() {
-
-    }
-
-    override fun hideLoadingIndicator() {
-
-    }
-
-    override fun showCharacterName(name: String) {
-        toolbar_layout?.title = name
-    }
-
-    override fun showCharacterImage(imageUrl: String) {
-        imageLoader.loadImageFittedToImageView(
-                imageUrl = imageUrl,
-                imageView = characterImage
-        )
+    override fun showCharacter(character: CharacterBindingModel) {
+        binding?.run {
+            this.character = character
+            this.imageLoader = character.imageLoader
+        }
+        showCharacterSeries(character.series)
     }
 
     override fun showCharacterSeries(series: List<String>) {

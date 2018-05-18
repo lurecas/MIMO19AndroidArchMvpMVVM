@@ -8,4 +8,9 @@
     <string name="character_detail_section_stories">Stories</string>
     <string name="character_detail_section_comics">Comics</string>
 
+    <!-- Avenger section -->
+    <string name="avenger_character">%s is an Avenger!</string>
+    <string name="not_avenger_character">%s is not an Avenger :-(</string>
+    <string name="description_not_available">There no available description</string>
+
 </resources>

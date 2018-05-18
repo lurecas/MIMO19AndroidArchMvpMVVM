@@ -2,6 +2,7 @@ package es.upsa.mimo.mimo18_androidarch.detail
 
 import es.upsa.mimo.mimo18_androidarch.base.BasePresenter
 import es.upsa.mimo.mimo18_androidarch.base.BaseView
+import es.upsa.mimo.mimo18_androidarch.marvel.bindingModel.CharacterBindingModel
 
 /**
  * This specifies the contract between the view and the presenter.
@@ -10,13 +11,7 @@ interface CharacterDetailContract {
 
     interface View : BaseView {
 
-        fun showLoadingIndicator()
-
-        fun hideLoadingIndicator()
-
-        fun showCharacterName(name: String)
-
-        fun showCharacterImage(imageUrl: String)
+        fun showCharacter(character : CharacterBindingModel)
 
         fun showCharacterComics(comics: List<String>)
 

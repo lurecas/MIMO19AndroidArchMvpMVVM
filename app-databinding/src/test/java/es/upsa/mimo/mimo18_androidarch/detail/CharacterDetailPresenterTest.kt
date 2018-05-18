@@ -1,16 +1,20 @@
 package es.upsa.mimo.mimo18_androidarch.detail
 
+import com.nhaarman.mockito_kotlin.argumentCaptor
 import es.upsa.mimo.mimo18_androidarch.marvel.MarvelApi
 import es.upsa.mimo.mimo18_androidarch.marvel.apiModel.Character
 import es.upsa.mimo.mimo18_androidarch.marvel.apiModel.CharacterDataContainer
 import es.upsa.mimo.mimo18_androidarch.marvel.apiModel.CharactersResponse
 import es.upsa.mimo.mimo18_androidarch.marvel.apiModel.Image
+import es.upsa.mimo.mimo18_androidarch.marvel.bindingModel.CharacterBindingModel
 import es.upsa.mimo.mimo18_androidarch.util.HashGenerator
+import es.upsa.mimo.mimo18_androidarch.util.ImageLoader
 import es.upsa.mimo.mimo18_androidarch.util.TimestampProvider
+import org.hamcrest.CoreMatchers.`is`
+import org.hamcrest.MatcherAssert.assertThat
 import org.junit.Test
 import org.mockito.Matchers
 import org.mockito.Mockito
-import org.mockito.Mockito.times
 import org.mockito.Mockito.verify
 import org.mockito.invocation.InvocationOnMock
 import org.mockito.stubbing.Answer
@@ -106,7 +110,8 @@ class CharacterDetailPresenterTest {
         presenter = CharacterDetailPresenter(
                 api = mockSuccesfulApiResponse(mockCharacterResponse()),
                 hashGenerator = mockHashGenerator(),
-                timestampProvider = Mockito.mock(TimestampProvider::class.java)
+                timestampProvider = Mockito.mock(TimestampProvider::class.java),
+                imageLoader = Mockito.mock(ImageLoader::class.java)
         )
     }
 
@@ -114,21 +119,9 @@ class CharacterDetailPresenterTest {
         presenter = CharacterDetailPresenter(
                 api = mockErrorApiResponse(),
                 hashGenerator = mockHashGenerator(),
-                timestampProvider = Mockito.mock(TimestampProvider::class.java)
+                timestampProvider = Mockito.mock(TimestampProvider::class.java),
+                imageLoader = Mockito.mock(ImageLoader::class.java)
         )
-    }
-
-
-    @Test
-    fun afterPresenterStartViewHideAndShowLoadingIndicator() {
-
-        buildPresenterWithSuccesfulResponse()
-
-        presenter?.start(detailView, TEST_CHAR_ID)
-
-        verify(detailView, times(2)).hideLoadingIndicator()
-        verify(detailView).showLoadingIndicator()
-
     }
 
     @Test
@@ -148,7 +141,10 @@ class CharacterDetailPresenterTest {
 
         presenter?.start(detailView, TEST_CHAR_ID)
 
-        verify(detailView).showCharacterName(TEST_CHARACTER_NAME)
+        val argumentCaptor = argumentCaptor<CharacterBindingModel>()
+
+        verify(detailView).showCharacter(argumentCaptor.capture())
+        assertThat(argumentCaptor.firstValue.name, `is`(TEST_CHARACTER_NAME))
 
     }
 
@@ -158,8 +154,11 @@ class CharacterDetailPresenterTest {
         buildPresenterWithSuccesfulResponse()
 
         presenter?.start(detailView, TEST_CHAR_ID)
+        val argumentCaptor = argumentCaptor<CharacterBindingModel>()
 
-        verify(detailView).showCharacterImage("$TEST_CHARACTER_THUMBNAIL_PATH.$TEST_CHARACTER_THUMBNAIL_EXTENSION")
+        verify(detailView).showCharacter(argumentCaptor.capture())
+        assertThat(argumentCaptor.firstValue.imageUrl,
+                `is`("$TEST_CHARACTER_THUMBNAIL_PATH.$TEST_CHARACTER_THUMBNAIL_EXTENSION"))
 
     }
 

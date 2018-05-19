@@ -8,7 +8,7 @@
 
         <variable
             name="character"
-            type="es.upsa.mimo.mimo18_androidarch.marvel.bindingModel.CharacterBindingModel"/>
+            type="es.upsa.mimo.mimo18_androidarch.detail.model.CharacterBindingModel"/>
 
         <variable
             name="imageLoader"

@@ -5,7 +5,7 @@ import android.arch.lifecycle.MutableLiveData
 import es.upsa.mimo.mimo18_androidarch.marvel.MarvelApi
 import es.upsa.mimo.mimo18_androidarch.marvel.MarvelApiConstants
 import es.upsa.mimo.mimo18_androidarch.marvel.apiModel.CharactersResponse
-import es.upsa.mimo.mimo18_androidarch.marvel.bindingModel.CharacterBindingModel
+import es.upsa.mimo.mimo18_androidarch.detail.model.CharacterBindingModel
 import es.upsa.mimo.mimo18_androidarch.marvel.bindingModel.CharacterBindingModelMapper
 import es.upsa.mimo.mimo18_androidarch.list.model.CharacterListBindingModel
 import es.upsa.mimo.mimo18_androidarch.util.HashGenerator

@@ -7,6 +7,7 @@ import es.upsa.mimo.mimo18_androidarch.di.module.ApiModule
 import es.upsa.mimo.mimo18_androidarch.di.module.DataModule
 import es.upsa.mimo.mimo18_androidarch.di.module.ImageModule
 import es.upsa.mimo.mimo18_androidarch.di.module.NetworkModule
+import es.upsa.mimo.mimo18_androidarch.di.module.RepositoryModule
 import es.upsa.mimo.mimo18_androidarch.di.scopes.DetailScope
 
 @Subcomponent(
@@ -15,7 +16,7 @@ import es.upsa.mimo.mimo18_androidarch.di.scopes.DetailScope
             ApiModule::class,
             ImageModule::class,
             DataModule::class,
-            CharacterDetailModule::class]
+            RepositoryModule::class]
 )
 @DetailScope
 interface CharacterDetailComponent : AndroidInjector<CharacterDetailActivity> {

@@ -1,4 +1,4 @@
-package es.upsa.mimo.mimo18_androidarch.marvel.bindingModel
+package es.upsa.mimo.mimo18_androidarch.detail.model
 
 import android.databinding.BindingAdapter
 import android.widget.ImageView

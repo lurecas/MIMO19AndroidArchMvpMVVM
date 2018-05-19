@@ -1,1 +1,1 @@
-include ':app-mvp', ':app-databinding'
+include ':app-mvp', ':app-databinding', ':app-mvvm'

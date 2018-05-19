@@ -1,5 +1,7 @@
 package es.upsa.mimo.mimo18_androidarch.list
 
+import android.app.PendingIntent.getActivity
+import android.arch.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
@@ -43,7 +45,6 @@ class CharacterListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.character_list_activity)
 
-        setSupportActionBar(toolbar)
 
         injectDependencies()
 

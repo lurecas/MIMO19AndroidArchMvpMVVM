@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "/Users/lurecas/Documents/MIMO18/mvp/MIMO19AndroidArchMvpMVVM/app-mvvm/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/character_detail_list_header_section.xml",
+        "source": "/Users/lurecas/Documents/MIMO18/mvp/MIMO19AndroidArchMvpMVVM/app-mvvm/src/main/res/layout/character_detail_list_header_section.xml"
+    },
+    {
+        "merged": "/Users/lurecas/Documents/MIMO18/mvp/MIMO19AndroidArchMvpMVVM/app-mvvm/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/character_list_list_item.xml",
+        "source": "/Users/lurecas/Documents/MIMO18/mvp/MIMO19AndroidArchMvpMVVM/app-mvvm/src/main/res/layout/character_list_list_item.xml"
+    },
+    {
+        "merged": "/Users/lurecas/Documents/MIMO18/mvp/MIMO19AndroidArchMvpMVVM/app-mvvm/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/character_detail_activity.xml",
+        "source": "/Users/lurecas/Documents/MIMO18/mvp/MIMO19AndroidArchMvpMVVM/app-mvvm/src/main/res/layout/character_detail_activity.xml"
+    },
+    {
+        "merged": "/Users/lurecas/Documents/MIMO18/mvp/MIMO19AndroidArchMvpMVVM/app-mvvm/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/character_detail_list_section_item.xml",
+        "source": "/Users/lurecas/Documents/MIMO18/mvp/MIMO19AndroidArchMvpMVVM/app-mvvm/src/main/res/layout/character_detail_list_section_item.xml"
+    }
+]

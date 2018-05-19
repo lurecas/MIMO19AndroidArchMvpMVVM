@@ -9,7 +9,7 @@ android {
     compileSdkVersion 27
 
     defaultConfig {
-        applicationId "es.upsa.mimo.mimo18_androidarch.daggerv2"
+        applicationId "es.upsa.mimo.mimo18_androidarch.databinding"
         minSdkVersion 26
         targetSdkVersion 27
         versionCode 1

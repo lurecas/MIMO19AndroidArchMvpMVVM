@@ -66,7 +66,7 @@ class CharacterDetailActivity : AppCompatActivity() {
         viewModel.getCharacterDetail(charId = characterID)
                 .observe(
                         this,
-                        Observer<CharacterBindingModel> {
+                        Observer {
 
                             if (it != null) {
                                 showCharacter(it)

@@ -7,21 +7,24 @@ import es.upsa.mimo.mimo18_androidarch.MarvelApplication
 import es.upsa.mimo.mimo18_androidarch.detail.viewModel.CharacterDetailViewModel
 import es.upsa.mimo.mimo18_androidarch.list.viewModel.CharacterListViewModel
 import es.upsa.mimo.mimo18_androidarch.marvel.repository.MarvelDataSource
+import es.upsa.mimo.mimo18_androidarch.util.ImageLoader
 import java.util.concurrent.Callable
 
 class CharacterViewModelFactory(
         marvelDataSource: MarvelDataSource,
-        application: MarvelApplication) : ViewModelProvider.Factory {
+        application: MarvelApplication,
+        imageLoader: ImageLoader
+        ) : ViewModelProvider.Factory {
 
     private val creators: ArrayMap<Class<*>, Callable<out ViewModel>> = ArrayMap()
 
     init {
         // View models cannot be injected directly because they won't be bound to the owner's view model scope.
         creators[CharacterListViewModel::class.java] =
-                Callable<ViewModel> { CharacterListViewModel(application, marvelDataSource) }
+                Callable<ViewModel> { CharacterListViewModel(application, marvelDataSource, imageLoader) }
 
         creators[CharacterDetailViewModel::class.java] =
-                Callable<ViewModel> { CharacterDetailViewModel(application, marvelDataSource) }
+                Callable<ViewModel> { CharacterDetailViewModel(application, marvelDataSource, imageLoader) }
 
     }
 

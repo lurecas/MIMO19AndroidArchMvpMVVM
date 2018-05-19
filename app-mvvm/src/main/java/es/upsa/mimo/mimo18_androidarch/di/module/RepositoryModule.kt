@@ -20,26 +20,26 @@ class RepositoryModule {
     fun provideMarvelApiService(
             api: MarvelApi,
             hashGenerator: HashGenerator,
-            timestampProvider: TimestampProvider,
-            imageLoader: ImageLoader
+            timestampProvider: TimestampProvider
     ): MarvelDataSource {
 
         return MarvelRepository(
                 api = api,
                 hashGenerator = hashGenerator,
-                timestampProvider = timestampProvider,
-                imageLoader = imageLoader
+                timestampProvider = timestampProvider
         )
     }
 
     @Provides
     fun provideViewModelFactory(
             marvelDataSource: MarvelDataSource,
-            application: MarvelApplication
+            application: MarvelApplication,
+            imageLoader: ImageLoader
     ): ViewModelProvider.Factory {
         return CharacterViewModelFactory(
-                marvelDataSource,
-                application
+                marvelDataSource = marvelDataSource,
+                application = application,
+                imageLoader = imageLoader
         )
     }
 

@@ -65,7 +65,7 @@ class CharacterListActivity : AppCompatActivity() {
 
         viewModel.getCharacterList().observe(
                 this,
-                Observer<List<CharacterListBindingModel>> {
+                Observer<List<CharacterListBindingModel>?> {
 
                     it?.let {
                         listAdapter?.characters(it)

@@ -4,10 +4,8 @@ import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import es.upsa.mimo.mimo18_androidarch.marvel.MarvelApi
 import es.upsa.mimo.mimo18_androidarch.marvel.MarvelApiConstants
+import es.upsa.mimo.mimo18_androidarch.marvel.apiModel.Character
 import es.upsa.mimo.mimo18_androidarch.marvel.apiModel.CharactersResponse
-import es.upsa.mimo.mimo18_androidarch.detail.model.CharacterBindingModel
-import es.upsa.mimo.mimo18_androidarch.marvel.bindingModel.CharacterBindingModelMapper
-import es.upsa.mimo.mimo18_androidarch.list.model.CharacterListBindingModel
 import es.upsa.mimo.mimo18_androidarch.util.HashGenerator
 import es.upsa.mimo.mimo18_androidarch.util.ImageLoader
 import es.upsa.mimo.mimo18_androidarch.util.TimestampProvider
@@ -17,24 +15,23 @@ import retrofit2.Response
 
 interface MarvelDataSource {
 
-    fun getCharacterList(): LiveData<List<CharacterListBindingModel>>
+    fun getCharacterList(): LiveData<List<Character>?>
 
-    fun getCharacterDetail(characterID: String): LiveData<CharacterBindingModel>
+    fun getCharacterDetail(characterID: String): LiveData<Character?>
 
-    fun searchCharacters(name: String): LiveData<List<CharacterBindingModel>>
+    fun searchCharacters(name: String): LiveData<List<Character>?>
 
 }
 
 class MarvelRepository(
         var api: MarvelApi,
         var hashGenerator: HashGenerator,
-        var timestampProvider: TimestampProvider,
-        var imageLoader: ImageLoader
+        var timestampProvider: TimestampProvider
 ) : MarvelDataSource {
 
-    override fun getCharacterList(): LiveData<List<CharacterListBindingModel>> {
+    override fun getCharacterList(): LiveData<List<Character>?> {
 
-        val liveData = MutableLiveData<List<CharacterListBindingModel>>()
+        val liveData = MutableLiveData<List<Character>?>()
 
         val timestamp = timestampProvider.getTimestamp()
 
@@ -53,13 +50,7 @@ class MarvelRepository(
 
                     response.body()!!
                             .data!!.results!!.toList()
-                            .map {
-                                CharacterBindingModelMapper
-                                        .mapCharacterToCharacterListBindingModel(
-                                                character = it,
-                                                imageLoader = imageLoader
-                                        )
-                            }.let {
+                            .let {
                                 liveData.value = it
                             }
 
@@ -77,8 +68,8 @@ class MarvelRepository(
         return liveData
     }
 
-    override fun getCharacterDetail(characterID: String): LiveData<CharacterBindingModel> {
-        val liveData = MutableLiveData<CharacterBindingModel>()
+    override fun getCharacterDetail(characterID: String): LiveData<Character?> {
+        val liveData = MutableLiveData<Character?>()
 
         val timestamp = timestampProvider.getTimestamp()
 
@@ -100,8 +91,6 @@ class MarvelRepository(
                             .data!!.results!!.toList()
                             .first()
                             .let {
-                                CharacterBindingModelMapper.mapCharacterToCharacterBindingModel(character = it, imageLoader = imageLoader)
-                            }.let {
                                 liveData.value = it
                             }
 
@@ -119,9 +108,9 @@ class MarvelRepository(
         return liveData
     }
 
-    override fun searchCharacters(name: String): LiveData<List<CharacterBindingModel>> {
+    override fun searchCharacters(name: String): LiveData<List<Character>?> {
 
-        val liveData = MutableLiveData<List<CharacterBindingModel>>()
+        val liveData = MutableLiveData<List<Character>?>()
 
         val timestamp = timestampProvider.getTimestamp()
 
@@ -141,9 +130,7 @@ class MarvelRepository(
 
                     response.body()!!
                             .data!!.results!!.toList()
-                            .map {
-                                CharacterBindingModelMapper.mapCharacterToCharacterBindingModel(character = it, imageLoader = imageLoader)
-                            }.let {
+                            .let {
                                 liveData.value = it
                             }
 

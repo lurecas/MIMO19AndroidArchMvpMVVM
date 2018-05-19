@@ -1,7 +1,7 @@
-package es.upsa.mimo.mimo18_androidarch.marvel
+package es.upsa.mimo.mimo18_androidarch.model
 
 
-import es.upsa.mimo.mimo18_androidarch.marvel.apiModel.CharactersResponse
+import es.upsa.mimo.mimo18_androidarch.model.apiModel.CharactersResponse
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path

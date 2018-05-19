@@ -6,10 +6,10 @@ import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.Transformations
 import es.upsa.mimo.mimo18_androidarch.list.model.CharacterListBindingModel
-import es.upsa.mimo.mimo18_androidarch.marvel.apiModel.Character
-import es.upsa.mimo.mimo18_androidarch.marvel.bindingModel.CharacterBindingModelMapper
-import es.upsa.mimo.mimo18_androidarch.marvel.repository.MarvelDataSource
-import es.upsa.mimo.mimo18_androidarch.util.ImageLoader
+import es.upsa.mimo.mimo18_androidarch.model.apiModel.Character
+import es.upsa.mimo.mimo18_androidarch.model.bindingModel.CharacterBindingModelMapper
+import es.upsa.mimo.mimo18_androidarch.model.repository.MarvelDataSource
+import es.upsa.mimo.mimo18_androidarch.view.util.ImageLoader
 
 class CharacterListViewModel(
         application: Application,

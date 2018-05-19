@@ -1,4 +1,4 @@
-package es.upsa.mimo.mimo18_androidarch.util
+package es.upsa.mimo.mimo18_androidarch.view.util
 
 interface TimestampProvider {
     fun getTimestamp(): Long

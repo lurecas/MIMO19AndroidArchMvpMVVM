@@ -4,13 +4,13 @@ import android.arch.lifecycle.ViewModelProvider
 import dagger.Module
 import dagger.Provides
 import es.upsa.mimo.mimo18_androidarch.MarvelApplication
-import es.upsa.mimo.mimo18_androidarch.list.CharacterViewModelFactory
-import es.upsa.mimo.mimo18_androidarch.marvel.MarvelApi
-import es.upsa.mimo.mimo18_androidarch.marvel.repository.MarvelDataSource
-import es.upsa.mimo.mimo18_androidarch.marvel.repository.MarvelRepository
-import es.upsa.mimo.mimo18_androidarch.util.HashGenerator
-import es.upsa.mimo.mimo18_androidarch.util.ImageLoader
-import es.upsa.mimo.mimo18_androidarch.util.TimestampProvider
+import es.upsa.mimo.mimo18_androidarch.viewModel.MarvelViewModelFactory
+import es.upsa.mimo.mimo18_androidarch.model.MarvelApi
+import es.upsa.mimo.mimo18_androidarch.model.repository.MarvelDataSource
+import es.upsa.mimo.mimo18_androidarch.model.repository.MarvelRepository
+import es.upsa.mimo.mimo18_androidarch.view.util.HashGenerator
+import es.upsa.mimo.mimo18_androidarch.view.util.ImageLoader
+import es.upsa.mimo.mimo18_androidarch.view.util.TimestampProvider
 
 
 @Module
@@ -36,7 +36,7 @@ class RepositoryModule {
             application: MarvelApplication,
             imageLoader: ImageLoader
     ): ViewModelProvider.Factory {
-        return CharacterViewModelFactory(
+        return MarvelViewModelFactory(
                 marvelDataSource = marvelDataSource,
                 application = application,
                 imageLoader = imageLoader

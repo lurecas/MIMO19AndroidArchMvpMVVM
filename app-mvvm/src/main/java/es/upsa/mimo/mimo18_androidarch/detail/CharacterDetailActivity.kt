@@ -15,7 +15,7 @@ import es.upsa.mimo.mimo18_androidarch.R
 import es.upsa.mimo.mimo18_androidarch.databinding.CharacterDetailActivityBinding
 import es.upsa.mimo.mimo18_androidarch.detail.model.CharacterBindingModel
 import es.upsa.mimo.mimo18_androidarch.detail.viewModel.CharacterDetailViewModel
-import es.upsa.mimo.mimo18_androidarch.mvvm.Event
+import es.upsa.mimo.mimo18_androidarch.view.Event
 import io.github.luizgrp.sectionedrecyclerviewadapter.SectionedRecyclerViewAdapter
 import kotlinx.android.synthetic.main.character_detail_activity.*
 import javax.inject.Inject

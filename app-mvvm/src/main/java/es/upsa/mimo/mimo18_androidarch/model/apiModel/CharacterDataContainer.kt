@@ -1,4 +1,4 @@
-package es.upsa.mimo.mimo18_androidarch.marvel.apiModel
+package es.upsa.mimo.mimo18_androidarch.model.apiModel
 
 import com.google.gson.annotations.SerializedName
 

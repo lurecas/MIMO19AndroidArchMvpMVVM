@@ -12,7 +12,7 @@
 
         <variable
             name="imageLoader"
-            type="es.upsa.mimo.mimo18_androidarch.util.ImageLoader"/>
+            type="es.upsa.mimo.mimo18_androidarch.view.util.ImageLoader"/>
 
         <variable
             name="itemClickListener"

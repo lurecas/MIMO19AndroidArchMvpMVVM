@@ -3,8 +3,8 @@ package es.upsa.mimo.mimo18_androidarch.di.module
 import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
-import es.upsa.mimo.mimo18_androidarch.marvel.MarvelApi
-import es.upsa.mimo.mimo18_androidarch.marvel.MarvelApiConstants
+import es.upsa.mimo.mimo18_androidarch.model.MarvelApi
+import es.upsa.mimo.mimo18_androidarch.model.MarvelApiConstants
 import okhttp3.OkHttpClient
 import retrofit2.Converter
 import retrofit2.Retrofit

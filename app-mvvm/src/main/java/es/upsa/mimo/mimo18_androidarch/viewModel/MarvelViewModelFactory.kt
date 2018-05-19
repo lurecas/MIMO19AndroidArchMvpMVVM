@@ -1,4 +1,4 @@
-package es.upsa.mimo.mimo18_androidarch.list
+package es.upsa.mimo.mimo18_androidarch.viewModel
 
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
@@ -6,11 +6,11 @@ import android.support.v4.util.ArrayMap
 import es.upsa.mimo.mimo18_androidarch.MarvelApplication
 import es.upsa.mimo.mimo18_androidarch.detail.viewModel.CharacterDetailViewModel
 import es.upsa.mimo.mimo18_androidarch.list.viewModel.CharacterListViewModel
-import es.upsa.mimo.mimo18_androidarch.marvel.repository.MarvelDataSource
-import es.upsa.mimo.mimo18_androidarch.util.ImageLoader
+import es.upsa.mimo.mimo18_androidarch.model.repository.MarvelDataSource
+import es.upsa.mimo.mimo18_androidarch.view.util.ImageLoader
 import java.util.concurrent.Callable
 
-class CharacterViewModelFactory(
+class MarvelViewModelFactory(
         marvelDataSource: MarvelDataSource,
         application: MarvelApplication,
         imageLoader: ImageLoader

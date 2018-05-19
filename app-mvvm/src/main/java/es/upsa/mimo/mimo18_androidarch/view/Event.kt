@@ -1,4 +1,4 @@
-package es.upsa.mimo.mimo18_androidarch.mvvm
+package es.upsa.mimo.mimo18_androidarch.view
 
 /**
  * Used as a wrapper for data that is exposed via a LiveData that represents an event.

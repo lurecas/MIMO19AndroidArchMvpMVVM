@@ -1,9 +1,9 @@
-package es.upsa.mimo.mimo18_androidarch.marvel.bindingModel
+package es.upsa.mimo.mimo18_androidarch.model.bindingModel
 
 import es.upsa.mimo.mimo18_androidarch.detail.model.CharacterBindingModel
 import es.upsa.mimo.mimo18_androidarch.list.model.CharacterListBindingModel
-import es.upsa.mimo.mimo18_androidarch.marvel.apiModel.Character
-import es.upsa.mimo.mimo18_androidarch.util.ImageLoader
+import es.upsa.mimo.mimo18_androidarch.model.apiModel.Character
+import es.upsa.mimo.mimo18_androidarch.view.util.ImageLoader
 
 object CharacterBindingModelMapper {
 

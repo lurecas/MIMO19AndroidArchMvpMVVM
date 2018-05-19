@@ -7,10 +7,10 @@ import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.Transformations
 import es.upsa.mimo.mimo18_androidarch.detail.model.CharacterBindingModel
-import es.upsa.mimo.mimo18_androidarch.marvel.bindingModel.CharacterBindingModelMapper
-import es.upsa.mimo.mimo18_androidarch.marvel.repository.MarvelDataSource
-import es.upsa.mimo.mimo18_androidarch.mvvm.Event
-import es.upsa.mimo.mimo18_androidarch.util.ImageLoader
+import es.upsa.mimo.mimo18_androidarch.model.bindingModel.CharacterBindingModelMapper
+import es.upsa.mimo.mimo18_androidarch.model.repository.MarvelDataSource
+import es.upsa.mimo.mimo18_androidarch.view.Event
+import es.upsa.mimo.mimo18_androidarch.view.util.ImageLoader
 
 class CharacterDetailViewModel(
         application: Application,

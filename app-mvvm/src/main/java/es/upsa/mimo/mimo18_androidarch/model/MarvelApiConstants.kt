@@ -1,4 +1,4 @@
-package es.upsa.mimo.mimo18_androidarch.marvel
+package es.upsa.mimo.mimo18_androidarch.model
 
 object MarvelApiConstants {
     const val MARVEL_API_BASE_URL = "https://gateway.marvel.com:443"

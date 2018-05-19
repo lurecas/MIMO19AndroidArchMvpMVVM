@@ -3,7 +3,7 @@ package es.upsa.mimo.mimo18_androidarch.detail.model
 import android.databinding.BindingAdapter
 import android.widget.ImageView
 import es.upsa.mimo.mimo18_androidarch.R
-import es.upsa.mimo.mimo18_androidarch.util.ImageLoader
+import es.upsa.mimo.mimo18_androidarch.view.util.ImageLoader
 
 
 data class CharacterBindingModel(

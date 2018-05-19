@@ -10,8 +10,8 @@ import es.upsa.mimo.mimo18_androidarch.R
 import es.upsa.mimo.mimo18_androidarch.detail.CharacterDetailActivity
 import es.upsa.mimo.mimo18_androidarch.list.viewModel.CharacterListViewModel
 import es.upsa.mimo.mimo18_androidarch.list.model.CharacterListBindingModel
-import es.upsa.mimo.mimo18_androidarch.util.ActivityNavigator
-import es.upsa.mimo.mimo18_androidarch.util.ImageLoader
+import es.upsa.mimo.mimo18_androidarch.view.util.ActivityNavigator
+import es.upsa.mimo.mimo18_androidarch.view.util.ImageLoader
 import kotlinx.android.synthetic.main.character_list_activity.*
 import kotlinx.android.synthetic.main.view_recycler_view.*
 import javax.inject.Inject

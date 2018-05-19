@@ -1,4 +1,4 @@
-package es.upsa.mimo.mimo18_androidarch.util
+package es.upsa.mimo.mimo18_androidarch.view.util
 
 import android.content.Context
 import android.content.Intent

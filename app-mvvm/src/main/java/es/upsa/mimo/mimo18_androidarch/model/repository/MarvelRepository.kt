@@ -1,14 +1,13 @@
-package es.upsa.mimo.mimo18_androidarch.marvel.repository
+package es.upsa.mimo.mimo18_androidarch.model.repository
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
-import es.upsa.mimo.mimo18_androidarch.marvel.MarvelApi
-import es.upsa.mimo.mimo18_androidarch.marvel.MarvelApiConstants
-import es.upsa.mimo.mimo18_androidarch.marvel.apiModel.Character
-import es.upsa.mimo.mimo18_androidarch.marvel.apiModel.CharactersResponse
-import es.upsa.mimo.mimo18_androidarch.util.HashGenerator
-import es.upsa.mimo.mimo18_androidarch.util.ImageLoader
-import es.upsa.mimo.mimo18_androidarch.util.TimestampProvider
+import es.upsa.mimo.mimo18_androidarch.model.MarvelApi
+import es.upsa.mimo.mimo18_androidarch.model.MarvelApiConstants
+import es.upsa.mimo.mimo18_androidarch.model.apiModel.Character
+import es.upsa.mimo.mimo18_androidarch.model.apiModel.CharactersResponse
+import es.upsa.mimo.mimo18_androidarch.view.util.HashGenerator
+import es.upsa.mimo.mimo18_androidarch.view.util.TimestampProvider
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

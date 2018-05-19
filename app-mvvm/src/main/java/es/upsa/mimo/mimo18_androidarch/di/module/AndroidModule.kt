@@ -7,8 +7,8 @@ import dagger.Provides
 import es.upsa.mimo.mimo18_androidarch.MarvelApplication
 import es.upsa.mimo.mimo18_androidarch.detail.di.CharacterDetailComponent
 import es.upsa.mimo.mimo18_androidarch.list.di.CharacterListComponent
-import es.upsa.mimo.mimo18_androidarch.util.ActivityNavigator
-import es.upsa.mimo.mimo18_androidarch.util.ActivityNavigatorImpl
+import es.upsa.mimo.mimo18_androidarch.view.util.ActivityNavigator
+import es.upsa.mimo.mimo18_androidarch.view.util.ActivityNavigatorImpl
 
 
 @Module(subcomponents = [

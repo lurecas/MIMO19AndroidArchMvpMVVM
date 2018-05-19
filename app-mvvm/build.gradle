@@ -31,12 +31,12 @@ android {
 dependencies {
 
     def versions = [
-            supportLib: '27.1.1',
-            picasso   : '2.71828',
-            retrofit  : '2.4.0',
-            daggerVersion : '2.15',
-            arch      : '1.1.1',
-            junit     : '4.12',
+            supportLib   : '27.1.1',
+            picasso      : '2.71828',
+            retrofit     : '2.4.0',
+            daggerVersion: '2.15',
+            arch         : '1.1.1',
+            junit        : '4.12',
     ]
 
     def testVersions = [
@@ -77,7 +77,14 @@ dependencies {
 
     testImplementation "junit:junit:$testVersions.junitVersion"
     testImplementation "org.mockito:mockito-all:$testVersions.mockitoVersion"
+    testImplementation "com.nhaarman:mockito-kotlin-kt1.1:1.5.0"
     testImplementation "org.hamcrest:hamcrest-all:$testVersions.hamcrestVersion"
+
+    testImplementation("android.arch.core:core-testing:$versions.arch", {
+        exclude group: 'com.android.support', module: 'support-compat'
+        exclude group: 'com.android.support', module: 'support-annotations'
+        exclude group: 'com.android.support', module: 'support-core-utils'
+    })
 
 
     androidTestCompile "junit:junit:$testVersions.junitVersion"

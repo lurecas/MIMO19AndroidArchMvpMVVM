@@ -7,6 +7,7 @@ import es.upsa.mimo.mimo18_androidarch.marvel.MarvelApiConstants
 import es.upsa.mimo.mimo18_androidarch.marvel.apiModel.CharactersResponse
 import es.upsa.mimo.mimo18_androidarch.marvel.bindingModel.CharacterBindingModel
 import es.upsa.mimo.mimo18_androidarch.marvel.bindingModel.CharacterBindingModelMapper
+import es.upsa.mimo.mimo18_androidarch.list.model.CharacterListBindingModel
 import es.upsa.mimo.mimo18_androidarch.util.HashGenerator
 import es.upsa.mimo.mimo18_androidarch.util.ImageLoader
 import es.upsa.mimo.mimo18_androidarch.util.TimestampProvider
@@ -16,7 +17,7 @@ import retrofit2.Response
 
 interface MarvelDataSource {
 
-    fun getCharacterList(): LiveData<List<CharacterBindingModel>>
+    fun getCharacterList(): LiveData<List<CharacterListBindingModel>>
 
     fun getCharacterDetail(characterID: String): LiveData<CharacterBindingModel>
 
@@ -31,9 +32,9 @@ class MarvelRepository(
         var imageLoader: ImageLoader
 ) : MarvelDataSource {
 
-    override fun getCharacterList(): LiveData<List<CharacterBindingModel>> {
+    override fun getCharacterList(): LiveData<List<CharacterListBindingModel>> {
 
-        val liveData = MutableLiveData<List<CharacterBindingModel>>()
+        val liveData = MutableLiveData<List<CharacterListBindingModel>>()
 
         val timestamp = timestampProvider.getTimestamp()
 
@@ -53,7 +54,11 @@ class MarvelRepository(
                     response.body()!!
                             .data!!.results!!.toList()
                             .map {
-                                CharacterBindingModelMapper.mapCharacterToCharacterBindingModel(character = it, imageLoader = imageLoader)
+                                CharacterBindingModelMapper
+                                        .mapCharacterToCharacterListBindingModel(
+                                                character = it,
+                                                imageLoader = imageLoader
+                                        )
                             }.let {
                                 liveData.value = it
                             }

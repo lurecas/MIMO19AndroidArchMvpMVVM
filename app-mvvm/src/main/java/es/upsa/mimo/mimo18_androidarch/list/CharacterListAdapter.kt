@@ -7,13 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import es.upsa.mimo.mimo18_androidarch.R
 import es.upsa.mimo.mimo18_androidarch.databinding.CharacterListListItemBinding
-import es.upsa.mimo.mimo18_androidarch.marvel.bindingModel.CharacterBindingModel
+import es.upsa.mimo.mimo18_androidarch.list.model.CharacterListBindingModel
 
 class CharacterListAdapter(
         private val itemListener: OnItemClickListener?
 ) : RecyclerView.Adapter<CharacterListAdapter.CharacterVH>() {
 
-    private var characters: List<CharacterBindingModel> = emptyList()
+    private var characters: List<CharacterListBindingModel> = emptyList()
 
     interface OnItemClickListener {
         fun onItemClicked(charId: String)
@@ -25,7 +25,7 @@ class CharacterListAdapter(
             private val itemListener: OnItemClickListener?
     ) : RecyclerView.ViewHolder(itemView) {
 
-        fun bind(item: CharacterBindingModel) {
+        fun bind(item: CharacterListBindingModel) {
 
             with(binding) {
                 character = item
@@ -40,20 +40,23 @@ class CharacterListAdapter(
 
     }
 
-    fun characters(characters: List<CharacterBindingModel>) {
+    fun characters(characters: List<CharacterListBindingModel>) {
         this.characters = characters
         notifyDataSetChanged() // This is bad. Used for simplicity.
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CharacterVH {
-        val inflater = LayoutInflater.from(parent.context)
-        val view = inflater.inflate(R.layout.character_list_list_item, parent, false)
-        val binding = DataBindingUtil.bind<CharacterListListItemBinding>(view)!!
-        return CharacterVH(
-                itemView = view,
-                binding = binding,
-                itemListener = itemListener
-        )
+        return LayoutInflater
+                .from(parent.context)
+                .inflate(R.layout.character_list_list_item, parent, false)
+                .let { view ->
+                    val binding = DataBindingUtil.bind<CharacterListListItemBinding>(view)!!
+                    CharacterVH(
+                            itemView = view,
+                            binding = binding,
+                            itemListener = itemListener
+                    )
+                }
     }
 
     override fun onBindViewHolder(holder: CharacterVH, position: Int) {

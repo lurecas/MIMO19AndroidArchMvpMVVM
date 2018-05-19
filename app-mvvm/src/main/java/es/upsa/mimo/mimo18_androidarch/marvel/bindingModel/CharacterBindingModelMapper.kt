@@ -1,5 +1,6 @@
 package es.upsa.mimo.mimo18_androidarch.marvel.bindingModel
 
+import es.upsa.mimo.mimo18_androidarch.list.model.CharacterListBindingModel
 import es.upsa.mimo.mimo18_androidarch.marvel.apiModel.Character
 import es.upsa.mimo.mimo18_androidarch.util.ImageLoader
 
@@ -7,7 +8,7 @@ object CharacterBindingModelMapper {
 
     fun mapCharacterToCharacterBindingModel(
             character: Character,
-            imageLoader : ImageLoader
+            imageLoader: ImageLoader
     ): CharacterBindingModel {
 
         return character.let {
@@ -40,6 +41,22 @@ object CharacterBindingModelMapper {
 
         }
 
+    }
+
+    fun mapCharacterToCharacterListBindingModel(
+            character: Character,
+            imageLoader: ImageLoader
+    ): CharacterListBindingModel {
+        return character.let {
+
+            CharacterListBindingModel(
+                    id = it.id ?: "",
+                    name = it.name ?: "unnamed",
+                    imageUrl = it.thumbnail?.path + "." + it.thumbnail?.extension,
+                    imageLoader = imageLoader
+            )
+
+        }
     }
 
 

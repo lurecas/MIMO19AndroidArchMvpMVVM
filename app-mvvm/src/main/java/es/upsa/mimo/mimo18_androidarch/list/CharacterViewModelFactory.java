@@ -4,6 +4,7 @@ import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProvider;
 import android.support.v4.util.ArrayMap;
 import es.upsa.mimo.mimo18_androidarch.MarvelApplication;
+import es.upsa.mimo.mimo18_androidarch.list.viewModel.CharacterListViewModel;
 import es.upsa.mimo.mimo18_androidarch.marvel.repository.MarvelDataSource;
 import java.util.Map;
 import java.util.concurrent.Callable;

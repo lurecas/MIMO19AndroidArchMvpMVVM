@@ -15,6 +15,7 @@ import es.upsa.mimo.mimo18_androidarch.R
 import es.upsa.mimo.mimo18_androidarch.databinding.CharacterDetailActivityBinding
 import es.upsa.mimo.mimo18_androidarch.detail.model.CharacterBindingModel
 import es.upsa.mimo.mimo18_androidarch.detail.viewModel.CharacterDetailViewModel
+import es.upsa.mimo.mimo18_androidarch.mvvm.Event
 import io.github.luizgrp.sectionedrecyclerviewadapter.SectionedRecyclerViewAdapter
 import kotlinx.android.synthetic.main.character_detail_activity.*
 import javax.inject.Inject
@@ -48,7 +49,7 @@ class CharacterDetailActivity : AppCompatActivity() {
 
         characterID = intent.getStringExtra(BUNDLE_CHARACTER_ID)
 
-        viewModel= ViewModelProviders
+        viewModel = ViewModelProviders
                 .of(this, viewModelFactory)
                 .get(CharacterDetailViewModel::class.java)
 
@@ -75,6 +76,17 @@ class CharacterDetailActivity : AppCompatActivity() {
 
                         })
 
+
+        viewModel.subscribeUserMessages()
+                .observe(
+                        this,
+                        Observer<Event<String>> {
+                            it?.getContentIfNotHandled()?.let {
+                                showSnackbarWithText(it)
+                            }
+                        }
+                )
+
     }
 
     private fun showCharacter(character: CharacterBindingModel) {
@@ -94,7 +106,7 @@ class CharacterDetailActivity : AppCompatActivity() {
                             title = androidResources.getString(R.string.character_detail_section_series),
                             items = series,
                             itemClick = {
-                                showSnackbarWithText("Don't miss out the $series series")
+                                viewModel?.userClickedOnItem("Don't miss out the $series series")
                             }
                     )
             )
@@ -109,7 +121,7 @@ class CharacterDetailActivity : AppCompatActivity() {
                             title = androidResources.getString(R.string.character_detail_section_stories),
                             items = stories,
                             itemClick = {
-                                showSnackbarWithText("You can find more related stories on $it")
+                                viewModel?.userClickedOnItem("You can find more related stories on $it")
                             }
                     )
             )
@@ -124,7 +136,7 @@ class CharacterDetailActivity : AppCompatActivity() {
                             title = androidResources.getString(R.string.character_detail_section_comics),
                             items = comics,
                             itemClick = {
-                                showSnackbarWithText("You should read : $it !")
+                                viewModel?.userClickedOnItem("You should read : $it !")
                             }
                     )
             )

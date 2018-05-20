@@ -75,14 +75,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/TextAppearance.AppCompat.Subhead"
-
             android:visibility="@{character.name != null ? View.VISIBLE : View.GONE}"
-
-            android:text="@{character.anAvenger == true ?
-             String.format(@string/avenger_character, character.name)
-            : String.format(@string/not_avenger_character, character.name)
-            }"
-
+            android:text="@{character.anAvenger == true ? String.format(@string/avenger_character, character.name) : String.format(@string/not_avenger_character, character.name)}"
             tools:text="Test description"/>
 
         <TextView

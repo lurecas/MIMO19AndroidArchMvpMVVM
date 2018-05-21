@@ -8,6 +8,7 @@ import es.upsa.mimo.mimo18_androidarch.viewModel.MarvelViewModelFactory
 import es.upsa.mimo.mimo18_androidarch.model.MarvelApi
 import es.upsa.mimo.mimo18_androidarch.model.repository.MarvelDataSource
 import es.upsa.mimo.mimo18_androidarch.model.repository.MarvelRepository
+import es.upsa.mimo.mimo18_androidarch.view.util.ActivityNavigator
 import es.upsa.mimo.mimo18_androidarch.view.util.HashGenerator
 import es.upsa.mimo.mimo18_androidarch.view.util.ImageLoader
 import es.upsa.mimo.mimo18_androidarch.view.util.TimestampProvider
@@ -34,12 +35,14 @@ class RepositoryModule {
     fun provideViewModelFactory(
             marvelDataSource: MarvelDataSource,
             application: MarvelApplication,
-            imageLoader: ImageLoader
+            imageLoader: ImageLoader,
+            activityNavigator: ActivityNavigator
     ): ViewModelProvider.Factory {
         return MarvelViewModelFactory(
                 marvelDataSource = marvelDataSource,
                 application = application,
-                imageLoader = imageLoader
+                imageLoader = imageLoader,
+                activityNavigator = activityNavigator
         )
     }
 

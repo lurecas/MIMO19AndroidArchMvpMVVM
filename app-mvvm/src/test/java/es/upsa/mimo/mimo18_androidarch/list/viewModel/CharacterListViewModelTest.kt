@@ -16,6 +16,7 @@ import es.upsa.mimo.mimo18_androidarch.model.apiModel.CharacterDataContainer
 import es.upsa.mimo.mimo18_androidarch.model.apiModel.CharactersResponse
 import es.upsa.mimo.mimo18_androidarch.model.apiModel.Image
 import es.upsa.mimo.mimo18_androidarch.model.repository.MarvelDataSource
+import es.upsa.mimo.mimo18_androidarch.view.util.ActivityNavigator
 import es.upsa.mimo.mimo18_androidarch.view.util.ImageLoader
 import org.hamcrest.CoreMatchers.`is`
 import org.junit.Assert.assertThat
@@ -42,7 +43,8 @@ class CharacterListViewModelTest {
         viewModel = CharacterListViewModel(
                 mock(Application::class.java),
                 repo,
-                mock(ImageLoader::class.java))
+                mock(ImageLoader::class.java),
+                mock(ActivityNavigator::class.java))
     }
 
     @Test
@@ -52,8 +54,6 @@ class CharacterListViewModelTest {
 
         repo.mockedCharReturn = character
 
-        val lifecycleOwner = createAndStartLifecycleOwner()
-
         val observerFunction = lambdaMock<(List<CharacterListBindingModel>?) -> Unit>()
         val observer = Observer<List<CharacterListBindingModel>?> {
             observerFunction.invoke(it)
@@ -61,12 +61,12 @@ class CharacterListViewModelTest {
 
         viewModel
                 .getCharacterList()
-                .observe(lifecycleOwner, observer)
+                .observeForever(observer)
+
+        verify(repo).getCharacterList()
 
         val argumentCaptor = argumentCaptor<List<CharacterListBindingModel>>()
-
         verify(observerFunction).invoke(argumentCaptor.capture())
-        verify(repo).getCharacterList()
         assertThat(argumentCaptor.firstValue[0].name, `is`(TEST_CHARACTER_NAME))
 
     }

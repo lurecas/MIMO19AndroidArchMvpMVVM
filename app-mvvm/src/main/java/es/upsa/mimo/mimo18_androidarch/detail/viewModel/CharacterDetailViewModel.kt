@@ -15,7 +15,7 @@ import es.upsa.mimo.mimo18_androidarch.view.util.ImageLoader
 class CharacterDetailViewModel(
         application: Application,
         private val marvelApiDataSource: MarvelDataSource,
-        var imageLoader: ImageLoader
+        private var imageLoader: ImageLoader
 ) : AndroidViewModel(application) {
 
     fun getCharacterDetail(charId: String): LiveData<CharacterBindingModel?> {

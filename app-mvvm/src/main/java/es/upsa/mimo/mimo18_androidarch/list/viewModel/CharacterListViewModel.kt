@@ -9,12 +9,14 @@ import es.upsa.mimo.mimo18_androidarch.list.model.CharacterListBindingModel
 import es.upsa.mimo.mimo18_androidarch.model.apiModel.Character
 import es.upsa.mimo.mimo18_androidarch.model.bindingModel.CharacterBindingModelMapper
 import es.upsa.mimo.mimo18_androidarch.model.repository.MarvelDataSource
+import es.upsa.mimo.mimo18_androidarch.view.util.ActivityNavigator
 import es.upsa.mimo.mimo18_androidarch.view.util.ImageLoader
 
 class CharacterListViewModel(
         application: Application,
         private val marvelApiDataSource: MarvelDataSource,
-        var imageLoader: ImageLoader
+        private var imageLoader: ImageLoader,
+        private val activityNavigator: ActivityNavigator
 ) : AndroidViewModel(application) {
 
     fun getCharacterList(): LiveData<List<CharacterListBindingModel>?> {
@@ -32,5 +34,10 @@ class CharacterListViewModel(
         )
 
     }
+
+    fun onCharacterSelected(charId: String) {
+        activityNavigator.openCharacterActivity(charId = charId)
+    }
+
 
 }

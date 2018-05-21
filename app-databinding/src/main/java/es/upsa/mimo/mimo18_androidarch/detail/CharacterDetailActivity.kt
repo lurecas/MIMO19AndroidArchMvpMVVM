@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.RecyclerView
+import android.view.LayoutInflater
 import android.view.View
 import dagger.android.AndroidInjection
 import es.upsa.mimo.mimo18_androidarch.R
@@ -13,6 +14,7 @@ import es.upsa.mimo.mimo18_androidarch.databinding.CharacterDetailActivityBindin
 import es.upsa.mimo.mimo18_androidarch.marvel.bindingModel.CharacterBindingModel
 import io.github.luizgrp.sectionedrecyclerviewadapter.SectionedRecyclerViewAdapter
 import kotlinx.android.synthetic.main.character_detail_activity.*
+import kotlinx.android.synthetic.main.character_detail_list_section_item.*
 import javax.inject.Inject
 
 

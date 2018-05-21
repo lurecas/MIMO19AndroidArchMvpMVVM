@@ -60,7 +60,6 @@ class CharacterListAdapter(
     }
 
     override fun onBindViewHolder(holder: CharacterVH, position: Int) {
-
         holder.bind(characters[position])
     }
 
